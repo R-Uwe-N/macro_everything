@@ -1,0 +1,6 @@
+click 1
+wait 5
+click 2
+#wait ms ! ns - ms - s - min
+wait 100
+click 3

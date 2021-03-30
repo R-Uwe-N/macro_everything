@@ -1,0 +1,4 @@
+mouse move 10 10 ! move to absolut position
+mouse rmove 10 10 ! move relative
+mouse fade 10 10 5 ! move the mouse within 5 seconds to absolut position 
+mouse rfade 10 10 0.5 ! move the mouse within 0.5 seconds to relative position 

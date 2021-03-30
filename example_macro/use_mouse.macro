@@ -1,0 +1,10 @@
+mouse click_m ! middle click
+mouse click_r
+mouse click_l
+mouse scroll 10 
+mouse scroll -10
+mouse click_rd ! right doubleclick
+mouse click_ld
+mouse mdclick_md
+mouse hold_r ! hold right button
+mouse release_r ! release right button

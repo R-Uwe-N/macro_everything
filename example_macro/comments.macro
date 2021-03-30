@@ -1,0 +1,8 @@
+click 1 ! comment after command
+! comment between commands
+click 2
+!!
+multiline
+comment
+!!
+click 3
