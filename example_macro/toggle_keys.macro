@@ -1,0 +1,5 @@
+hold q
+click p
+wait 2
+clock o
+release q

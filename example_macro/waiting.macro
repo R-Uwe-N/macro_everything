@@ -1,6 +1,8 @@
 click 1
 wait 5
 click 2
-#wait ms ! ns - ms - s - min
-wait 100
+wait 0.8
 click 3
+#wait ms ! ns - ms - s - min (default seconds)
+wait 100
+click 4
