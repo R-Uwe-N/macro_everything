@@ -1,8 +1,8 @@
 {
-  "emergency_stop": ["esc"],
-  "start_last": ["ctrl", "f7"],
-  "start_any": ["ctrl", "f7", "num"],
-  "toggle_recording": ["shift", "f7"],
+  "emergency_stop": "<esc>",
+  "start_last": "<ctrl>+<f7>",
+  "choose_macro": "<ctrl>+<f6>",
+  "toggle_recording": "<shift>+<f7>",
   "last_used": null,
-  "base_path": "example_macro"
+  "base_path": "example_macro/"
 }
