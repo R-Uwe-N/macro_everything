@@ -30,6 +30,16 @@ def get_lines(data):
     return stripped
 
 
+def check_argument(key):
+    norm_arg = keyboard._canonical_names.normalize_name(key.lower())
+    if (norm_arg not in keyboard._canonical_names.canonical_names.values() and
+            norm_arg not in keyboard._canonical_names.all_modifiers):
+        if ord(norm_arg[0]) not in range(97, 123) or len(norm_arg) != 1:  # If no single character a-z
+            if norm_arg not in (f"f{x}" for x in range(1, 13)):
+                return False
+    return True
+
+
 def parse_line(line):
     # Remove comments
     temp = line.split("!")
@@ -52,19 +62,34 @@ def parse_line(line):
                 raise SyntaxError(f"Illegal operation in line '{line}': Unknown operation '{args[0]}'")
 
             # Check if arguments are valid
-            norm_arg = keyboard._canonical_names.normalize_name(args[1].lower())
-            if (norm_arg not in keyboard._canonical_names.canonical_names.values() and
-                    norm_arg not in keyboard._canonical_names.all_modifiers):
-                if ord(norm_arg[0]) not in range(97, 123) or len(norm_arg) != 1:  # If no single character a-z
-                    if norm_arg not in (f"f{x}" for x in range(1, 13)):
-                        raise ValueError(f"Invalid argument in line '{line}': '{args[1]}'")
+            if "+" in args[1] and len(args[1]) > 1:
+                if args[1].count("+") > 1:
+                    raise ValueError(f"Invalid argument in Line '{line}': {args[1]}")
+                if not (check_argument(args[1].split("+")[0]) and check_argument(args[1].split("+")[1])):
+                    raise ValueError(f"Invalid argument in Line '{line}': {args[1]}")
+            else:
+                if not check_argument(args[1]):
+                    raise ValueError(f"Invalid argument in Line '{line}': {args[1]}")
 
-            return args[0], [args[1]]
+            if args[0] == "click":
+                return keyboard.press_and_release, args[1]
 
-    return ""
+            if args[0] == "hold":
+                return keyboard.press, args[1]
+
+            if args[0] == "release":
+                return keyboard.release, args[1]
+        print(command)
+    return ()
 
 
 def parse_lines(arr):
+    in_loop = False
+    commands = []
+    for c in arr:
+        if len(c) == 2:
+            c[0](c[1])
+
     return []
 
 
@@ -81,3 +106,4 @@ parse_file("example_macro/special_keys.macro")
 parse_file("example_macro/toggle_keys.macro")
 parse_file("example_macro/use_mouse.macro")
 parse_file("example_macro/waiting.macro")
+parse_file("example_macro/combinations.macro")

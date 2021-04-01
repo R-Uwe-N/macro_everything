@@ -5,3 +5,5 @@ click right_ctrl
 click left
 click f12
 click tab
+click plus ! Dont use + -> it will raise an error
+click + ! Told you

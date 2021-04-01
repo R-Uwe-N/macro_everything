@@ -9,3 +9,4 @@ click g
 	click 0
 click .
 click 0
+click : ! This will print . -> use click shift+a
