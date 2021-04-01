@@ -1,8 +1,8 @@
 click 1 ! comment after command
 ! comment between commands
 click 2
-!!
+!-
 multiline
 comment
-!!
+-! This text will be ignored!
 click 3

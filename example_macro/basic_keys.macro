@@ -4,7 +4,8 @@ click a
 click z
 click i
 click n
-click g
-click 0
+
+click g 
+	click 0
 click .
 click 0
