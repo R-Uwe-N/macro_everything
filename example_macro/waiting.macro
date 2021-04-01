@@ -3,6 +3,8 @@ wait 5
 click 2
 wait 0.8
 click 3
-#wait ms ! ns - ms - s - min (default seconds)
+wait ms ! Set default waiting interval: ns - ms - s - min (default seconds)
 wait 100
 click 4
+wait 1 s ! Set waiting interval for this specific wait
+click 5

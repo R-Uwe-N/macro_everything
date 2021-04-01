@@ -1,5 +1,5 @@
 hold q
 click p
 wait 2
-clock o
+click o
 release q

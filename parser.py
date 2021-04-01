@@ -1,4 +1,5 @@
 import json
+import keyboard
 
 
 def parse_file(filename):
@@ -30,26 +31,35 @@ def get_lines(data):
 
 
 def parse_line(line):
-    multi_comment = ""
-
     # Remove comments
     temp = line.split("!")
     command = temp[0].strip()
-    if len(temp) > 1:
-        if len(temp[1]) > 0:
-            # Check if start of multiline-comment
-            if temp[1][0] == "-":
-                multi_comment = "s"
 
-    if len(command) > 0:
-        # Check if end of multiline-comment
-        if command[len(command)-1] == "-":
-            multi_comment = "e"
-            command = None
-    else:
-        command = None
+    # Process the command
+    if command:
+        # Get arguments
+        args = command.split(" ")
+        args = [x.strip() for x in args]
+        remove_element(args, "")
+        remove_element(args, "t")
 
-    print(command, temp, multi_comment)
+        # Check if command is valid
+        if args[0] not in ("mouse", "wait", "loop", "end"):  # Get only keyboard commands
+            if len(args) > 2:
+                raise SyntaxError(f"Too many arguments: {line}\n Expected 1 argument but got {len(args)-1}")
+
+            if args[0].lower() not in ("click", "hold", "release"):
+                raise SyntaxError(f"Illegal operation in line '{line}': Unknown operation '{args[0]}'")
+
+            # Check if arguments are valid
+            norm_arg = keyboard._canonical_names.normalize_name(args[1].lower())
+            if (norm_arg not in keyboard._canonical_names.canonical_names.values() and
+                    norm_arg not in keyboard._canonical_names.all_modifiers):
+                if ord(norm_arg[0]) not in range(97, 123) or len(norm_arg) != 1:  # If no single character a-z
+                    if norm_arg not in (f"f{x}" for x in range(1, 13)):
+                        raise ValueError(f"Invalid argument in line '{line}': '{args[1]}'")
+
+            return args[0], [args[1]]
 
     return ""
 
@@ -63,4 +73,11 @@ def remove_element(data, c):
         data.remove(c)
 
 
+parse_file("example_macro/basic_keys.macro")
+parse_file("example_macro/basic_loops.macro")
 parse_file("example_macro/comments.macro")
+parse_file("example_macro/move_mouse.macro")
+parse_file("example_macro/special_keys.macro")
+parse_file("example_macro/toggle_keys.macro")
+parse_file("example_macro/use_mouse.macro")
+parse_file("example_macro/waiting.macro")
