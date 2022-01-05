@@ -1,6 +1,11 @@
 import pynput
 import keyboard
 import json
+import tkinter
+
+from tkinter import filedialog
+from tkinter import messagebox
+from macro_parser import parse_file
 
 
 def parse_config():
@@ -31,6 +36,15 @@ def start_last():
 def select_macro():
     # Not implemented
     print("Selection Dialog")
+    root = tkinter.Tk()
+    root.withdraw()
+    file_path = tkinter.filedialog.askopenfilename(initialdir=BASE_PATH, title="Select Macro", multiple=False)
+    root.destroy()
+
+    if not file_path.endswith(".macro"):
+        alert("Bad file!", "You have to select a .macro file!")
+
+    parse_file(file_path)
 
 
 def toggle_record():
@@ -38,7 +52,16 @@ def toggle_record():
     print("starting to record macro")
 
 
+def alert(title, msg):
+    root = tkinter.Tk()
+    root.withdraw()
+    tkinter.messagebox.showerror(title=title, message=msg)
+    root.destroy()
+
+
 config = parse_config()
+
+BASE_PATH = config["base_path"]
 
 with pynput.keyboard.GlobalHotKeys(get_hotkeys_dict(config)) as hotkeys:
     hotkeys.join()

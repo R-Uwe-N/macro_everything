@@ -98,12 +98,13 @@ def remove_element(data, c):
         data.remove(c)
 
 
-parse_file("example_macro/basic_keys.macro")
-parse_file("example_macro/basic_loops.macro")
-parse_file("example_macro/comments.macro")
-parse_file("example_macro/move_mouse.macro")
-parse_file("example_macro/special_keys.macro")
-parse_file("example_macro/toggle_keys.macro")
-parse_file("example_macro/use_mouse.macro")
-parse_file("example_macro/waiting.macro")
-parse_file("example_macro/combinations.macro")
+if __name__ == "__main__":
+    parse_file("example_macro/basic_keys.macro")
+    parse_file("example_macro/basic_loops.macro")
+    parse_file("example_macro/comments.macro")
+    parse_file("example_macro/move_mouse.macro")
+    parse_file("example_macro/special_keys.macro")
+    parse_file("example_macro/toggle_keys.macro")
+    parse_file("example_macro/use_mouse.macro")
+    parse_file("example_macro/waiting.macro")
+    parse_file("example_macro/combinations.macro")
