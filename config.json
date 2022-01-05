@@ -1,6 +1,8 @@
 {
   "emergency_stop": "<esc>",
   "start_last": "<ctrl>+<f7>",
+  "restart_last": "<ctrl>+<f8>",
+  "stop_macro": "<backspace>",
   "choose_macro": "<ctrl>+<f6>",
   "toggle_recording": "<shift>+<f7>",
   "last_used": null,
